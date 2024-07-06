@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import './App.css';
+import { Main } from './views/Main/Main';
 
 class App extends Component {
   render() {
-    throw new Error('Something went wrong!');
-    return <p>Hello world</p>;
+    return <Main />;
   }
 }
 
