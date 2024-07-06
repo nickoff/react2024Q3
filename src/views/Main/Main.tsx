@@ -1,7 +1,12 @@
-import { Component, ReactNode } from 'react';
+import { Component } from 'react';
+import { Header } from '../../components/Header/Header';
 
 export class Main extends Component {
-  render(): ReactNode {
-    return <div>Main</div>;
+  render() {
+    return (
+      <>
+        <Header />
+      </>
+    );
   }
 }
