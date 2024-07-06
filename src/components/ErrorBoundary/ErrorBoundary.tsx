@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react';
+import { Component, ErrorInfo, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
   fallback: ReactNode;
@@ -16,7 +16,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   static getDerivedStateFromError() {
-    return { hasError: true };
+     return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.log(error, info.componentStack);
   }
 
   render() {
