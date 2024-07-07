@@ -47,16 +47,19 @@ export class PersonList extends Component<PersonListProps, PersonState> {
     return (
       <>
         {this.state.isLoading && <div className="person-list__loader">Loading...</div>}
-        {!this.state.isLoading && (
+        {!this.state.isLoading && this.state.personList.length > 0 && (
           <div className="person-list">
-            {this.state.personList &&
-              this.state.personList.map((person, index) => <Person key={index} person={person} />)}
+            {this.state.personList.map((person, index) => (
+              <Person key={index} person={person} />
+            ))}
           </div>
+        )}
+        {!this.state.isLoading && this.state.personList.length === 0 && (
+          <div className="person-list__loader">No results found</div>
         )}
       </>
     );
   }
-
   componentWillUnmount() {
     this.setState({ personList: [] });
   }
