@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import './PersonList.css';
-import { Person, PersonProps } from '../Person/Person';
+import { Person, IPerson } from '../Person/Person';
 
 type PersonState = {
-  personList: PersonProps[] | [];
+  personList: IPerson[] | [];
   isLoading: boolean;
 };
 
@@ -12,26 +12,18 @@ interface PersonListProps {
 }
 
 export class PersonList extends Component<PersonListProps, PersonState> {
-  state = {
-    personList: [],
-    isLoading: false,
-    searchTerm: ''
-  };
-
   constructor(props: PersonListProps) {
     super(props);
 
     this.state = {
       personList: [],
-      isLoading: false,
-      searchTerm: this.props.searchTerm
+      isLoading: false
     };
   }
 
-  componentDidMount() {
-    const param = this.state.searchTerm ? `?search=${this.state.searchTerm}` : '';
+  private getPersonList = (searchTerm: string) => {
+    const param = searchTerm ? `?search=${searchTerm}` : '';
     const apiUrl = `https://swapi.dev/api/people/${param}`;
-
     this.setState({ isLoading: true });
     fetch(apiUrl).then((response) => {
       response.json().then((data) => {
@@ -39,6 +31,16 @@ export class PersonList extends Component<PersonListProps, PersonState> {
         this.setState({ isLoading: false });
       });
     });
+  };
+
+  componentDidMount() {
+    this.getPersonList(this.props.searchTerm);
+  }
+
+  componentDidUpdate(prevProps: PersonListProps) {
+    if (this.props.searchTerm !== prevProps.searchTerm) {
+      this.getPersonList(this.props.searchTerm);
+    }
   }
 
   render() {

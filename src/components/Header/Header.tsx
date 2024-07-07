@@ -1,13 +1,17 @@
 import { Component } from 'react';
 import './Header.css';
 
+interface HeaderProps {
+  searchHandler: (value: string) => void;
+}
+
 interface HeaderPropsState {
   error: boolean;
   inputValue: string;
 }
 
-export class Header extends Component<unknown, HeaderPropsState> {
-  constructor(props: unknown) {
+export class Header extends Component<HeaderProps, HeaderPropsState> {
+  constructor(props: HeaderProps) {
     super(props);
     this.state = { error: false, inputValue: localStorage.getItem('searchTerm') || '' };
 
@@ -20,6 +24,7 @@ export class Header extends Component<unknown, HeaderPropsState> {
   };
 
   handleSearch = () => {
+    this.props.searchHandler(this.state.inputValue);
     localStorage.setItem('searchTerm', this.state.inputValue);
   };
 
