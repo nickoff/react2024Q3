@@ -7,15 +7,29 @@ type PersonState = {
   isLoading: boolean;
 };
 
-export class PersonList extends Component<unknown, PersonState> {
+interface PersonListProps {
+  searchTerm: string;
+}
+
+export class PersonList extends Component<PersonListProps, PersonState> {
   state = {
     personList: [],
-    isLoading: false
+    isLoading: false,
+    searchTerm: ''
   };
 
+  constructor(props: PersonListProps) {
+    super(props);
+
+    this.state = {
+      personList: [],
+      isLoading: false,
+      searchTerm: this.props.searchTerm
+    };
+  }
+
   componentDidMount() {
-    const prevSearchTerm = localStorage.getItem('searchTerm');
-    const param = prevSearchTerm ? `?search=${prevSearchTerm}` : '';
+    const param = this.state.searchTerm ? `?search=${this.state.searchTerm}` : '';
     const apiUrl = `https://swapi.dev/api/people/${param}`;
 
     this.setState({ isLoading: true });
