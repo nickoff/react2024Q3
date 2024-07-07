@@ -24,7 +24,7 @@ export class Header extends Component<unknown, HeaderPropsState> {
       <header className="header">
         <form className="search-form">
           <label className="search-form__label" htmlFor="search">
-            <h3>Search</h3>
+            <h3>Star Wars persons</h3>
           </label>
           <input className="search-form__input" type="text" name="search" id="search" />
           <button className="search-form__button" type="button">
