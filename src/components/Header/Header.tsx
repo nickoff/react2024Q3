@@ -19,13 +19,13 @@ export class Header extends Component<HeaderProps, HeaderPropsState> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.trim();
+    const inputValue = event.target.value;
     this.setState({ inputValue });
   };
 
   handleSearch = () => {
-    this.props.searchHandler(this.state.inputValue);
-    localStorage.setItem('searchTerm', this.state.inputValue);
+    this.props.searchHandler(this.state.inputValue.trim());
+    localStorage.setItem('searchTerm', this.state.inputValue.trim());
   };
 
   render() {
@@ -39,7 +39,7 @@ export class Header extends Component<HeaderProps, HeaderPropsState> {
 
     return (
       <header className="header">
-        <form className="search-form">
+        <form className="search-form" onSubmit={this.handleSearch}>
           <label className="search-form__label" htmlFor="search">
             <h3>Star Wars persons</h3>
           </label>
