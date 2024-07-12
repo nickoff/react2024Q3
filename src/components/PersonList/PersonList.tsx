@@ -1,66 +1,45 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 import './PersonList.css';
 import { Person, IPerson } from '../Person/Person';
-
-type PersonState = {
-  personList: IPerson[] | [];
-  isLoading: boolean;
-};
 
 interface PersonListProps {
   searchTerm: string;
 }
 
-export class PersonList extends Component<PersonListProps, PersonState> {
-  constructor(props: PersonListProps) {
-    super(props);
+export const PersonList = (props: PersonListProps) => {
+  const { searchTerm } = props;
+  const [isLoading, setIsLoading] = useState(false);
+  const [personList, setPersonList] = useState<IPerson[]>([]);
 
-    this.state = {
-      personList: [],
-      isLoading: false
-    };
-  }
+  console.log(searchTerm);
 
-  private getPersonList = (searchTerm: string) => {
+  const getPersonList = (searchTerm: string) => {
     const param = searchTerm ? `?search=${searchTerm}` : '';
     const apiUrl = `https://swapi.dev/api/people/${param}`;
-    this.setState({ isLoading: true });
+    setIsLoading(true);
     fetch(apiUrl).then((response) => {
       response.json().then((data) => {
-        this.setState({ personList: data.results });
-        this.setState({ isLoading: false });
+        setPersonList(data.results);
+        setIsLoading(false);
       });
     });
   };
 
-  componentDidMount() {
-    this.getPersonList(this.props.searchTerm);
-  }
+  useEffect(() => {
+    getPersonList(searchTerm);
+  }, [searchTerm]);
 
-  componentDidUpdate(prevProps: PersonListProps) {
-    if (this.props.searchTerm !== prevProps.searchTerm) {
-      this.getPersonList(this.props.searchTerm);
-    }
-  }
-
-  render() {
-    return (
-      <>
-        {this.state.isLoading && <div className="person-list__loader">Loading...</div>}
-        {!this.state.isLoading && this.state.personList.length > 0 && (
-          <div className="person-list">
-            {this.state.personList.map((person, index) => (
-              <Person key={index} person={person} />
-            ))}
-          </div>
-        )}
-        {!this.state.isLoading && this.state.personList.length === 0 && (
-          <div className="person-list__loader">No results found</div>
-        )}
-      </>
-    );
-  }
-  componentWillUnmount() {
-    this.setState({ personList: [] });
-  }
-}
+  return (
+    <>
+      {isLoading && <div className="person-list__loader">Loading...</div>}
+      {!isLoading && personList.length > 0 && (
+        <div className="person-list">
+          {personList.map((person, index) => (
+            <Person key={index} person={person} />
+          ))}
+        </div>
+      )}
+      {!isLoading && personList.length === 0 && <div className="person-list__loader">No results found</div>}
+    </>
+  );
+};

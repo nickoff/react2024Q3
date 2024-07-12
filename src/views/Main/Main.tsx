@@ -1,30 +1,19 @@
-import { Component } from 'react';
 import { Header } from '../../components/Header/Header';
 import { PersonList } from '../../components/PersonList/PersonList';
+import { useLocalStorageInitState } from '../../hooks/useLocalStorageInitState';
 
-type MainState = {
-  searchTerm: string;
+export const Main = () => {
+  const { searchTerm, setSearchTerm } = useLocalStorageInitState();
+  console.log(searchTerm);
+
+  const searchHandler = (value: string) => {
+    setSearchTerm(value);
+  };
+
+  return (
+    <>
+      <Header searchHandler={searchHandler} />
+      <PersonList searchTerm={searchTerm} />
+    </>
+  );
 };
-
-export class Main extends Component<unknown, MainState> {
-  constructor(props: unknown) {
-    super(props);
-
-    this.state = {
-      searchTerm: localStorage.getItem('searchTerm') || ''
-    };
-  }
-
-  render() {
-    const searchHandler = (value: string) => {
-      this.setState({ searchTerm: value });
-    };
-
-    return (
-      <>
-        <Header searchHandler={searchHandler} />
-        <PersonList searchTerm={this.state.searchTerm} />
-      </>
-    );
-  }
-}
