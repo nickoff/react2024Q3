@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './PersonList.css';
-import { Person, IPerson } from '../Person/Person';
+import { Person, PersonProps } from '../PersonCard/PersonCard';
 
 interface PersonListProps {
   searchTerm: string;
@@ -9,7 +9,7 @@ interface PersonListProps {
 export const PersonList = (props: PersonListProps) => {
   const { searchTerm } = props;
   const [isLoading, setIsLoading] = useState(false);
-  const [personList, setPersonList] = useState<IPerson[]>([]);
+  const [personList, setPersonList] = useState<PersonProps[]>([]);
 
   const getPersonList = (searchTerm: string) => {
     const param = searchTerm ? `?search=${searchTerm}` : '';
@@ -33,7 +33,17 @@ export const PersonList = (props: PersonListProps) => {
       {!isLoading && personList.length > 0 && (
         <div className="person-list">
           {personList.map((person, index) => (
-            <Person key={index} person={person} />
+            <Person
+              key={index}
+              name={person.name}
+              birth_year={person.birth_year}
+              gender={person.gender}
+              height={person.height}
+              hair_color={person.hair_color}
+              skin_color={person.skin_color}
+              eye_color={person.eye_color}
+              mass={person.mass}
+            />
           ))}
         </div>
       )}
