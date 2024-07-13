@@ -1,10 +1,9 @@
 import { Header } from '../../components/Header/Header';
 import { PersonList } from '../../components/PersonList/PersonList';
-import { useLocalStorageInitState } from '../../hooks/useLocalStorageInitState';
+import { useStoredState } from '../../hooks/useStoredState';
 
 export const Main = () => {
-  const { searchTerm, setSearchTerm } = useLocalStorageInitState();
-  console.log(searchTerm);
+  const { searchTerm, setSearchTerm } = useStoredState();
 
   const searchHandler = (value: string) => {
     setSearchTerm(value);

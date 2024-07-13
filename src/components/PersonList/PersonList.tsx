@@ -11,8 +11,6 @@ export const PersonList = (props: PersonListProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [personList, setPersonList] = useState<IPerson[]>([]);
 
-  console.log(searchTerm);
-
   const getPersonList = (searchTerm: string) => {
     const param = searchTerm ? `?search=${searchTerm}` : '';
     const apiUrl = `https://swapi.dev/api/people/${param}`;

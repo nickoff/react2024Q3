@@ -25,7 +25,6 @@ export class Header extends Component<HeaderProps, HeaderPropsState> {
 
   handleSearch = () => {
     this.props.searchHandler(this.state.inputValue.trim());
-    localStorage.setItem('searchTerm', this.state.inputValue.trim());
   };
 
   render() {
