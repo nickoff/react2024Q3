@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import './PersonList.css';
-import { Person, PersonProps } from '../PersonCard/PersonCard';
+import { Person } from '../PersonCard/PersonCard';
+import { useStarWarsApi } from '../../hooks/useStarWarsApi';
 
 interface PersonListProps {
   searchTerm: string;
@@ -8,24 +8,7 @@ interface PersonListProps {
 
 export const PersonList = (props: PersonListProps) => {
   const { searchTerm } = props;
-  const [isLoading, setIsLoading] = useState(false);
-  const [personList, setPersonList] = useState<PersonProps[]>([]);
-
-  const getPersonList = (searchTerm: string) => {
-    const param = searchTerm ? `?search=${searchTerm}` : '';
-    const apiUrl = `https://swapi.dev/api/people/${param}`;
-    setIsLoading(true);
-    fetch(apiUrl).then((response) => {
-      response.json().then((data) => {
-        setPersonList(data.results);
-        setIsLoading(false);
-      });
-    });
-  };
-
-  useEffect(() => {
-    getPersonList(searchTerm);
-  }, [searchTerm]);
+  const { isLoading, personList } = useStarWarsApi(searchTerm);
 
   return (
     <>
