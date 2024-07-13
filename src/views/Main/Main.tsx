@@ -11,7 +11,7 @@ export const Main = () => {
 
   return (
     <>
-      <Header searchHandler={searchHandler} />
+      <Header searchTerm={searchTerm} searchHandler={searchHandler} />
       <PersonList searchTerm={searchTerm} />
     </>
   );
