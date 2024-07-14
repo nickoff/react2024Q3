@@ -1,9 +1,8 @@
 .person-list {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(30%, 1fr));
-  gap: 20px;
-  padding: 20px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .person-list__loader {

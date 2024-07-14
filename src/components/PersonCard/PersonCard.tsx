@@ -1,34 +1,19 @@
+import { Link, useLocation } from 'react-router-dom';
 import './PesonCard.css';
 
 export interface PersonProps {
   name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
+  url: string;
 }
 
 export const Person = (props: PersonProps) => {
-  const { name, height, mass, hair_color, skin_color, eye_color, birth_year, gender } = props;
+  const { pathname } = useLocation();
+  const { name, url } = props;
+  const personId = url.split('/').reverse()[1];
 
   return (
-    <div className="person">
+    <Link to={`/person/${personId}` === pathname ? '/' : `/person/${personId}`} className="person">
       <h3>{name}</h3>
-      <div>
-        <p>Person description:</p>
-        <ul>
-          <li>height: {height}</li>
-          <li>mass: {mass}</li>
-          <li>hair color: {hair_color}</li>
-          <li>skin color: {skin_color}</li>
-          <li>eye color: {eye_color}</li>
-          <li>birth year: {birth_year}</li>
-          <li>gender: {gender}</li>
-        </ul>
-      </div>
-    </div>
+    </Link>
   );
 };

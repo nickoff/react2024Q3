@@ -1,28 +1,23 @@
 .person {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.6rem;
   background-color: gray;
   border-radius: 20px;
-  padding: 10px 40px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #ffffff;
 
   h3 {
-    width: 30%;
-    margin: 10px 0;
-  }
-
-  p {
-    font-size: 1.2rem;
     margin: 0;
-    text-decoration-line: underline;
+    margin-block: 0;
+    font-size: 1.6rem;
   }
+}
 
-  ul {
-    margin: 0;
-    font-size: 1.2rem;
-    color: rgb(228, 227, 227);
-    display: flex;
-    flex-direction: column;
+@media (hover: hover) {
+  .person:hover {
+    color: #cbc8c8;
+    background-color: rgb(99, 99, 99);
+    transition: 0.5s;
   }
 }

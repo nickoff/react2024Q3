@@ -1,6 +1,8 @@
+import { Outlet } from 'react-router-dom';
 import { Header } from '../../components/Header/Header';
 import { PersonList } from '../../components/PersonList/PersonList';
 import { useStoredState } from '../../hooks/useStoredState';
+import './Main.css';
 
 export const Main = () => {
   const { searchTerm, setSearchTerm } = useStoredState();
@@ -12,7 +14,10 @@ export const Main = () => {
   return (
     <>
       <Header searchTerm={searchTerm} searchHandler={searchHandler} />
-      <PersonList searchTerm={searchTerm} />
+      <div className="main">
+        <PersonList searchTerm={searchTerm} />
+        <Outlet />
+      </div>
     </>
   );
 };
