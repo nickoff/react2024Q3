@@ -1,7 +1,15 @@
-import { createBrowserRouter, createRoutesFromElements, LoaderFunction, Route, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  LoaderFunction,
+  Navigate,
+  Route,
+  RouterProvider
+} from 'react-router-dom';
 import { Main } from '../../views/Main/Main';
 import { PersonDescription } from '../../components/PersonDescription/PersonDescription';
 import { NotFound } from '../../views/NotFound/NotFound';
+import { Layout } from '../../views/Layout/Layout';
 
 const getPersonDescription = async (id: string | undefined) => {
   if (!id) return;
@@ -17,8 +25,11 @@ const loaderPersonDescription: LoaderFunction<{ personDescription: PersonDescrip
 export const AppRouter = () => {
   const routers = createRoutesFromElements(
     <>
-      <Route path="/" element={<Main />} errorElement={<p>Upps</p>}>
-        <Route path="person/:id" loader={loaderPersonDescription} element={<PersonDescription />} />
+      <Route path="/" element={<Navigate to="/1" />} errorElement={<p>Upps</p>}></Route>
+      <Route path="/" element={<Layout />} errorElement={<p>Upps</p>}>
+        <Route path="/:pageNumber" element={<Main />} errorElement={<p>Upps</p>}>
+          <Route path="person/:id" loader={loaderPersonDescription} element={<PersonDescription />} />
+        </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
     </>

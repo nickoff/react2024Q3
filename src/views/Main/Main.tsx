@@ -1,19 +1,14 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../../components/Header/Header';
 import { PersonList } from '../../components/PersonList/PersonList';
-import { useStoredState } from '../../hooks/useStoredState';
 import './Main.css';
+import { useContext } from 'react';
+import { SearchContext } from '../Layout/Layout';
 
 export const Main = () => {
-  const { searchTerm, setSearchTerm } = useStoredState();
-
-  const searchHandler = (value: string) => {
-    setSearchTerm(value);
-  };
+  const searchTerm = useContext(SearchContext);
 
   return (
     <>
-      <Header searchTerm={searchTerm} searchHandler={searchHandler} />
       <div className="main">
         <PersonList searchTerm={searchTerm} />
         <Outlet />

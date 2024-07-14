@@ -2,6 +2,16 @@
   width: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #a2a1a1;
+}
+
+.person-list__items {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   padding-right: 10px;
   border-right: 1px solid #a2a1a1;
@@ -15,4 +25,22 @@
   font-size: 1.6rem;
   padding-right: 10px;
   border-right: 1px solid #a2a1a1;
+}
+
+.person-list__pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.6rem;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    color: #a2a1a1;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }

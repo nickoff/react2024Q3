@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 import './PersonDescription.css';
 
 export interface PersonDescription {
@@ -15,12 +15,12 @@ export interface PersonDescription {
 
 export const PersonDescription = () => {
   const { personDescription } = useLoaderData() as { personDescription: PersonDescription };
-  console.log(personDescription);
   const { name, height, mass, hair_color, skin_color, eye_color, birth_year, gender } = personDescription;
+  const { pageNumber } = useParams();
 
   return (
     <div className="person-description">
-      <Link className="person-description__back-button" to="/">
+      <Link className="person-description__back-button" to={'/' + pageNumber}>
         CLOSE
       </Link>
 
