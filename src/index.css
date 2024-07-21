@@ -26,7 +26,3 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-.active {
-  color: #276bc3 !important;
-}

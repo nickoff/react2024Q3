@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import './Header.css';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   searchTerm: string;
@@ -8,17 +8,14 @@ interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
   const { searchTerm, searchHandler } = props;
-  const [inputValue, setInputValue] = useState(searchTerm);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    setInputValue(inputValue);
-  };
+  const navigate = useNavigate();
 
   const handleSearch = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    searchHandler(inputValue.trim());
+    const inputValue = event.target['search'].value.trim();
+    searchHandler(inputValue);
+    localStorage.setItem('searchTerm', inputValue);
+    navigate('/1');
   };
 
   return (
@@ -27,14 +24,7 @@ export const Header = (props: HeaderProps) => {
         <label className="search-form__label" htmlFor="search">
           <h3>Star Wars persons</h3>
         </label>
-        <input
-          className="search-form__input"
-          type="text"
-          name="search"
-          id="search"
-          value={inputValue}
-          onChange={handleChange}
-        />
+        <input className="search-form__input" type="text" name="search" id="search" defaultValue={searchTerm} />
         <button className="search-form__button" type="submit">
           Search
         </button>

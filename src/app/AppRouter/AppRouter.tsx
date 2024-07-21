@@ -25,9 +25,9 @@ const loaderPersonDescription: LoaderFunction<{ personDescription: PersonDescrip
 export const AppRouter = () => {
   const routers = createRoutesFromElements(
     <>
-      <Route path="/" element={<Navigate to="/1" />} errorElement={<p>Upps</p>}></Route>
+      <Route path="/" element={<Navigate to="/1" />} errorElement={<NotFound />}></Route>
       <Route path="/" element={<Layout />} errorElement={<p>Upps</p>}>
-        <Route path="/:pageNumber" element={<Main />} errorElement={<p>Upps</p>}>
+        <Route path="/:pageNumber" element={<Main />} errorElement={<NotFound />}>
           <Route path="person/:id" loader={loaderPersonDescription} element={<PersonDescription />} />
         </Route>
       </Route>
