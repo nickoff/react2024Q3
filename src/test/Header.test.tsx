@@ -7,11 +7,7 @@ test('Header component renders correctly', () => {
   const searchTerm = 'Luke Skywalker';
   const searchHandler = vi.fn();
 
-  render(
-    <BrowserRouter>
-      <Header searchTerm={searchTerm} searchHandler={searchHandler} />
-    </BrowserRouter>
-  );
+  render(<Header searchTerm={searchTerm} searchHandler={searchHandler} />, { wrapper: BrowserRouter });
 
   const inputElement = screen.getByLabelText('search-input') as HTMLInputElement;
   expect(inputElement).toBeDefined();
@@ -27,11 +23,7 @@ test('Header component calls searchHandler with trimmed input value on form subm
   const searchTerm = 'Darth Vader';
   const searchHandler = vi.fn();
 
-  render(
-    <BrowserRouter>
-      <Header searchTerm={searchTerm} searchHandler={searchHandler} />
-    </BrowserRouter>
-  );
+  render(<Header searchTerm={searchTerm} searchHandler={searchHandler} />, { wrapper: BrowserRouter });
 
   const inputElement = screen.getByLabelText('search-input') as HTMLInputElement;
   fireEvent.change(inputElement, { target: { value: 'Anakin Skywalker ' } });
