@@ -5,6 +5,6 @@ import { Main } from '../views/Main/Main';
 test('Main component renders correctly', () => {
   render(<Main />);
 
-  const mainComponent = screen.getByRole('heading', { name: 'Star Wars persons' });
-  expect(mainComponent).toBeDefined;
+  const mainComponent = screen.getByText('Loading...');
+  expect(mainComponent).to.exist;
 });

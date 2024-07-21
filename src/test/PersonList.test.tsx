@@ -6,5 +6,5 @@ test('PersonList component renders correctly', () => {
   render(<PersonList searchTerm="" />);
 
   const loading = screen.getByText('Loading...');
-  expect(loading).toBeDefined;
+  expect(loading).to.exist;
 });
