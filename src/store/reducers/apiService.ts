@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { PersonDescription } from '../../components/PersonDescription/PersonDescription';
 import { PersonProps } from '../../components/PersonCard/PersonCard';
 
-interface PersonList {
+export interface PersonList {
   count: number;
   results: PersonProps[];
 }

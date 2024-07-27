@@ -1,11 +1,16 @@
 .person {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: gray;
   border-radius: 20px;
   padding: 10px 20px;
   text-decoration: none;
   color: #ffffff;
+
+  a {
+    color: #ffffff;
+  }
 
   h3 {
     margin: 0;
@@ -14,10 +19,16 @@
   }
 }
 
+.person-checkbox {
+  width: 24px;
+  height: 24px;
+}
+
 @media (hover: hover) {
-  .person:hover {
-    color: #cbc8c8;
-    background-color: rgb(99, 99, 99);
-    transition: 0.5s;
+  .person {
+    a:hover {
+      color: #bfd9fb;
+      transition: 0.5s;
+    }
   }
 }
