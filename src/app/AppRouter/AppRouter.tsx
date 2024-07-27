@@ -3,7 +3,6 @@ import { Main } from '../../views/Main/Main';
 import { PersonDescription } from '../../components/PersonDescription/PersonDescription';
 import { NotFound } from '../../views/NotFound/NotFound';
 import { Layout } from '../../views/Layout/Layout';
-import { loaderPersonDescription } from './api';
 
 export const AppRouter = () => {
   const routers = createRoutesFromElements(
@@ -11,7 +10,7 @@ export const AppRouter = () => {
       <Route path="/" element={<Navigate to="/1" />} errorElement={<NotFound />}></Route>
       <Route path="/" element={<Layout />} errorElement={<p>Upps</p>}>
         <Route path="/:pageNumber" element={<Main />} errorElement={<NotFound />}>
-          <Route path="person/:id" loader={loaderPersonDescription} element={<PersonDescription />} />
+          <Route path="person/:id" element={<PersonDescription />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

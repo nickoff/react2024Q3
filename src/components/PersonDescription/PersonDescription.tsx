@@ -1,5 +1,6 @@
-import { Link, useLoaderData, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './PersonDescription.css';
+import { useGetPersonByIdQuery } from '../../store/reducers/apiService';
 
 export interface PersonDescription {
   name: string;
@@ -14,32 +15,36 @@ export interface PersonDescription {
 }
 
 export const PersonDescription = () => {
-  const { personDescription } = useLoaderData() as { personDescription: PersonDescription };
-  const { name, height, mass, hair_color, skin_color, eye_color, birth_year, gender } = personDescription;
-  const { pageNumber } = useParams();
+  const { pageNumber, id } = useParams();
+  const { data, error, isLoading } = useGetPersonByIdQuery(id);
 
   return (
     <div className="person-description">
-      <Link className="person-description__back-button" to={'/' + pageNumber}>
-        CLOSE
-      </Link>
-
-      {personDescription.detail && <p className="person-description__not-found">Not found person</p>}
-      {personDescription.name && (
+      {isLoading && <div className="person-description__loader">Loading...</div>}
+      {!isLoading && (
         <>
-          <h3>{name}</h3>
-          <div>
-            <p>Person description:</p>
-            <ul>
-              <li>height: {height}</li>
-              <li>mass: {mass}</li>
-              <li>hair color: {hair_color}</li>
-              <li>skin color: {skin_color}</li>
-              <li>eye color: {eye_color}</li>
-              <li>birth year: {birth_year}</li>
-              <li>gender: {gender}</li>
-            </ul>
-          </div>
+          <Link className="person-description__back-button" to={'/' + pageNumber}>
+            CLOSE
+          </Link>
+
+          {error && <p className="person-description__not-found">Not found person</p>}
+          {data && (
+            <>
+              <h3>{data?.name}</h3>
+              <div>
+                <p>Person description:</p>
+                <ul>
+                  <li>height: {data?.height}</li>
+                  <li>mass: {data?.mass}</li>
+                  <li>hair color: {data?.hair_color}</li>
+                  <li>skin color: {data?.skin_color}</li>
+                  <li>eye color: {data?.eye_color}</li>
+                  <li>birth year: {data?.birth_year}</li>
+                  <li>gender: {data?.gender}</li>
+                </ul>
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

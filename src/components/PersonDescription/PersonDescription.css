@@ -53,6 +53,17 @@
   text-decoration-line: none;
 }
 
+.person-description > .person-description__loader {
+  height: 100%;
+  margin: 0;
+  margin-bottom: 100px;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration-line: none;
+}
+
 @media (hover: hover) {
   .person-description__back-button:hover {
     color: #706f6f;
