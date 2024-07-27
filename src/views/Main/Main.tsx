@@ -5,10 +5,10 @@ import './Main.css';
 export const Main = () => {
   return (
     <>
-      <div className="main">
+      <main className="main">
         <PersonList />
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };

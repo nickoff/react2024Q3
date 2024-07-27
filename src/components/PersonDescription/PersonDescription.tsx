@@ -17,12 +17,12 @@ export interface PersonDescription {
 
 export const PersonDescription = () => {
   const { pageNumber, id } = useParams();
-  const { data, error, isLoading } = useGetPersonByIdQuery(id);
+  const { data, error, isFetching } = useGetPersonByIdQuery(id);
 
   return (
     <div className="person-description">
-      {isLoading && <div className="person-description__loader">Loading...</div>}
-      {!isLoading && (
+      {isFetching && <div className="person-description__loader">Loading...</div>}
+      {!isFetching && (
         <>
           <Link className="person-description__back-button" to={'/' + pageNumber}>
             CLOSE

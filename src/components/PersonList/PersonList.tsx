@@ -8,14 +8,14 @@ import { useParams } from 'react-router-dom';
 export const PersonList = () => {
   const searchTerm = useAppSelector((state) => state.search.value);
   const params = useParams();
-  const { data, isLoading } = useGetPersonListQuery({ searchTerm, pageNumber: params.pageNumber });
+  const { data, isFetching } = useGetPersonListQuery({ searchTerm, pageNumber: params.pageNumber });
   if (!data) return;
   const totalPages = Math.ceil(data.count / 10);
 
   return (
     <>
-      {isLoading && <div className="person-list__loader">Loading...</div>}
-      {!isLoading && data.results.length > 0 && (
+      {isFetching && <div className="person-list__loader">Loading...</div>}
+      {!isFetching && data.results.length > 0 && (
         <div className="person-list">
           <div className="person-list__items">
             {data.results.map((person, index) => (
@@ -25,7 +25,7 @@ export const PersonList = () => {
           <Pagination totalPages={totalPages} />
         </div>
       )}
-      {!isLoading && data.results.length === 0 && <div className="person-list__loader">No results found</div>}
+      {!isFetching && data.results.length === 0 && <div className="person-list__loader">No results found</div>}
     </>
   );
 };
