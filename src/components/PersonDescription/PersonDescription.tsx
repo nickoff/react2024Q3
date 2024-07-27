@@ -12,6 +12,7 @@ export interface PersonDescription {
   birth_year: string;
   gender: string;
   detail?: boolean;
+  url?: string;
 }
 
 export const PersonDescription = () => {
