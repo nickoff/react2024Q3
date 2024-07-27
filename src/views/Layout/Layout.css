@@ -1,8 +1,29 @@
 .layout {
   width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+.outlet__wrapper {
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.outlet {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding: 20px;
   flex: 1;
+}
+
+.layout.dark {
+  color: #ffffffde;
+  background-color: #242424;
+  color-scheme: light dark;
+  transition: all 0.5s;
 }

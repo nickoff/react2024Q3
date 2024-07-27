@@ -1,16 +1,33 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from '../../components/Header/Header';
 import './Layout.css';
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
-export const ThemeContext = createContext('');
+interface ThemeContext {
+  darkTheme: boolean;
+  changeTheme: () => void;
+}
+
+export const ThemeContext = createContext<ThemeContext>({
+  darkTheme: true,
+  changeTheme: () => {}
+});
 
 export const Layout = () => {
+  const [darkTheme, setDarkTheme] = useState(true);
+  const changeTheme = () => {
+    setDarkTheme(!darkTheme);
+  };
+
   return (
-    <ThemeContext.Provider value="dark">
-      <Header />
-      <div className="layout">
-        <Outlet />
+    <ThemeContext.Provider value={{ darkTheme, changeTheme }}>
+      <div className={darkTheme ? 'layout dark' : 'layout'}>
+        <div className="outlet__wrapper">
+          <Header />
+          <div className="outlet">
+            <Outlet />
+          </div>
+        </div>
       </div>
     </ThemeContext.Provider>
   );

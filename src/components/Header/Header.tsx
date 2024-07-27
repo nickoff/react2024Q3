@@ -2,9 +2,13 @@ import './Header.css';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { setNewSearchValue } from '../../store/reducers/search';
+import { useContext } from 'react';
+import { ThemeContext } from '../../views/Layout/Layout';
+import { ThemeIcon } from '../ThemeIcon/ThemeIcon';
 
 export const Header = () => {
   const searchTerm = useAppSelector((state) => state.search.value);
+  const { darkTheme, changeTheme } = useContext(ThemeContext);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -34,6 +38,10 @@ export const Header = () => {
           Search
         </button>
       </form>
+
+      <button className="theme-button" onClick={changeTheme}>
+        {darkTheme ? <ThemeIcon variant={'dark'} /> : <ThemeIcon variant={'light'} />}
+      </button>
     </header>
   );
 };
