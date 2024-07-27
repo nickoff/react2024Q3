@@ -1,19 +1,17 @@
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { setNewSearchValue } from '../../store/reducers/search';
 
-interface HeaderProps {
-  searchTerm: string;
-  searchHandler: (value: string) => void;
-}
-
-export const Header = (props: HeaderProps) => {
-  const { searchTerm, searchHandler } = props;
+export const Header = () => {
+  const searchTerm = useAppSelector((state) => state.search.value);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleSearch = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const inputValue = (event.target.elements[0] as HTMLInputElement).value.trim();
-    searchHandler(inputValue);
+    dispatch(setNewSearchValue(inputValue));
     localStorage.setItem('searchTerm', inputValue);
     navigate('/1');
   };

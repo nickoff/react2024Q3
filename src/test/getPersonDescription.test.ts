@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { loaderPersonDescription } from '.';
+import { loaderPersonDescription } from '../app/AppRouter/api';
 
 describe('getPersonDescription', () => {
   it('should fetch person description', async () => {

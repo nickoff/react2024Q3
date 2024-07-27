@@ -2,13 +2,10 @@ import './PersonList.css';
 import { Person } from '../PersonCard/PersonCard';
 import { useStarWarsApi } from '../../hooks/useStarWarsApi';
 import { Pagination } from '../Pagination/Pagination';
+import { useAppSelector } from '../../store/hooks';
 
-interface PersonListProps {
-  searchTerm: string;
-}
-
-export const PersonList = (props: PersonListProps) => {
-  const { searchTerm } = props;
+export const PersonList = () => {
+  const searchTerm = useAppSelector((state) => state.search.value);
   const { isLoading, personList, numberSearchItems } = useStarWarsApi(searchTerm);
   const totalPages = Math.ceil(numberSearchItems / 10);
 
