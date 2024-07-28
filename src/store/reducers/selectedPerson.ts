@@ -24,11 +24,17 @@ export const selectedPersonSlice = createSlice({
         ...state,
         selectedPerson: state.selectedPerson.filter((id) => id !== action.payload)
       };
+    },
+    unselectAll: (state) => {
+      return {
+        ...state,
+        selectedPerson: initialState.selectedPerson
+      };
     }
   }
 });
 
-export const { addSelectPerson, deleteSelectPerson } = selectedPersonSlice.actions;
+export const { addSelectPerson, deleteSelectPerson, unselectAll } = selectedPersonSlice.actions;
 export const selectSelectedPersonValue = (state: RootState) => state.selectedPerson.selectedPerson;
 
 export default selectedPersonSlice.reducer;

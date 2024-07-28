@@ -18,7 +18,6 @@ describe('ErrorBoundary component', () => {
     const mockFallback = vi.fn();
     const MockErrorComponent = () => {
       throw new Error('Test error');
-      return null;
     };
     render(
       <ErrorBoundary fallback={mockFallback}>

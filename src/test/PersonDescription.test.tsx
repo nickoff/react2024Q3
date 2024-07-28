@@ -1,34 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { expect, test } from 'vitest';
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { PersonDescription } from '../components/PersonDescription/PersonDescription';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
-test('PersonDescription component renders correctly', () => {
-  const personDescription = {
-    name: 'Luke Skywalker',
-    height: '172 cm',
-    mass: '77 kg',
-    hair_color: 'blond',
-    skin_color: 'fair',
-    eye_color: 'blue',
-    birth_year: '19BBY',
-    gender: 'male'
-  };
+test('PersonDescription component renders loading state', () => {
+  render(
+    <MemoryRouter initialEntries={['/1/1']}>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/:pageNumber/:id" element={<PersonDescription />} />
+        </Routes>
+      </Provider>
+    </MemoryRouter>
+  );
 
-  const routes = [
-    {
-      path: '1/person/:id',
-      element: <PersonDescription />,
-      loader: () => {
-        return { personDescription };
-      }
-    }
-  ];
-
-  const router = createMemoryRouter(routes, { initialEntries: ['/1/person/1'] });
-
-  render(<RouterProvider router={router} />);
-
-  const nameElement = screen;
-  expect(nameElement).toBeDefined;
+  expect(screen.getByText('Loading...')).toBeDefined();
 });

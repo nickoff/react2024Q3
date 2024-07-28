@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '../../components/Header/Header';
 import './Layout.css';
 import { createContext, useState } from 'react';
+import { Snackbar } from '../../components/Snackbar/Snackbar';
 
 interface ThemeContext {
   darkTheme: boolean;
@@ -27,6 +28,7 @@ export const Layout = () => {
           <div className="outlet">
             <Outlet />
           </div>
+          <Snackbar />
         </div>
       </div>
     </ThemeContext.Provider>
